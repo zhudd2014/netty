@@ -31,6 +31,7 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 
 
         String currentTime = requestCode.equalsIgnoreCase(body) ? new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) : "BAD_ORDER";
+        currentTime += System.getProperty("line.separator");
 
         System.out.println("Ret is :  " + currentTime);
 
