@@ -9,13 +9,14 @@ import java.io.UnsupportedEncodingException;
 
 public class TimeClientHandler extends ChannelHandlerAdapter {
 
+    private final String requestCode = "QUERY TIME ORDER";
 
     private int counter;
 
     private byte[] req;
 
     public TimeClientHandler(){
-        req = ("QUERY TIME ORDER"+System.getProperty("line.separator")).getBytes();
+        req = (requestCode+System.getProperty("line.separator")).getBytes();
 
     }
 

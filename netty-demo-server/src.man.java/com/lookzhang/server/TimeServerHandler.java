@@ -6,9 +6,13 @@ import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class TimeServerHandler extends ChannelHandlerAdapter {
+
+    private final String requestCode = "QUERY TIME ORDER";
 
     private int counter;
 
@@ -22,10 +26,11 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
                 System.getProperty("line.separator").length());
 
 
-        System.out.println("The time server receive order :" + body + " ;the counter is :"+ ++counter);
+        System.out.println("The time server receive order ,the counter is :" + ++counter);
+        System.out.println("Body is :\n" + body +"\nBody end");
 
 
-        String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new Date(System.currentTimeMillis()).toString() : "BAD ORDER";
+        String currentTime = requestCode.equalsIgnoreCase(body) ? new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) : "BAD_ORDER";
 
 
         ByteBuf resp = Unpooled.copiedBuffer(currentTime.getBytes());
@@ -42,6 +47,8 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+        cause.printStackTrace();
+        System.out.printf("get exception");
         ctx.close();
     }
 

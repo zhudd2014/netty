@@ -31,15 +31,17 @@ public class TimeServer {
     }
 
     public static void main(String[] args) throws InterruptedException {
+        System.out.println("Time Server start");
         int port = 8080;
         new TimeServer().bind(port);
-
+        System.out.println("Time Server start success");
     }
 
 
     private class ChildChannelHandler extends ChannelInitializer<SocketChannel>{
 
 
+        @Override
         protected void initChannel(SocketChannel socketChannel) throws Exception {
             socketChannel.pipeline().addLast(new TimeServerHandler());
         }
