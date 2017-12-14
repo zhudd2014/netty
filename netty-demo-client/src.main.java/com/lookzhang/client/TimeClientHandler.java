@@ -17,7 +17,6 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
 
     public TimeClientHandler(){
         req = (requestCode+System.getProperty("line.separator")).getBytes();
-
     }
 
     @Override
@@ -33,11 +32,11 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx,Object msg) throws UnsupportedEncodingException {
-        ByteBuf buf = (ByteBuf) msg;
-        byte[] req = new byte[buf.readableBytes()];
-
-        buf.readBytes(req);
-        String body = new String(req,"UTF-8");
+//        ByteBuf buf = (ByteBuf) msg;
+//        byte[] req = new byte[buf.readableBytes()];
+//
+//        buf.readBytes(req);
+        String body = (String)msg;
         System.out.println("Now is body:"+ body +"; the counter is :" + ++counter);
     }
 

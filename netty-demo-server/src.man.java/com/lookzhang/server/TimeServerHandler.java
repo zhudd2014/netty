@@ -19,30 +19,23 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws UnsupportedEncodingException {
 
-        ByteBuf buf = (ByteBuf) msg;
-        byte[] req = new byte[buf.readableBytes()];
-        buf.readBytes(req);
-        String body = new String(req, "UTF-8").substring(0, req.length -
-                System.getProperty("line.separator").length());
-
+//        ByteBuf buf = (ByteBuf) msg;
+//        byte[] req = new byte[buf.readableBytes()];
+//        buf.readBytes(req);
+//        String body = new String(req, "UTF-8").substring(0, req.length -
+//                System.getProperty("line.separator").length());
+        String body = (String) msg;
 
         System.out.println("The time server receive order ,the counter is :" + ++counter);
-        System.out.println("Body is :\n" + body +"\nBody end");
+        System.out.println("Body is :  " + body);
 
 
         String currentTime = requestCode.equalsIgnoreCase(body) ? new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) : "BAD_ORDER";
 
+        System.out.println("Ret is :  " + currentTime);
 
         ByteBuf resp = Unpooled.copiedBuffer(currentTime.getBytes());
-        ctx.write(resp);
-
-    }
-
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) {
-
-        ctx.flush();
-
+        ctx.writeAndFlush(resp);
     }
 
     @Override
