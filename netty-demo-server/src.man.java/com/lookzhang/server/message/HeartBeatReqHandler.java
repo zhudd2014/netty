@@ -1,7 +1,7 @@
 package com.lookzhang.server.message;
 
+import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.concurrent.ScheduledFuture;
 
 import java.util.concurrent.TimeUnit;
@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0
  * @date 2014年3月15日
  */
-public class HeartBeatReqHandler extends ChannelInboundHandlerAdapter {
+public class HeartBeatReqHandler extends ChannelHandlerAdapter {
 
 
     //使用定时任务发送

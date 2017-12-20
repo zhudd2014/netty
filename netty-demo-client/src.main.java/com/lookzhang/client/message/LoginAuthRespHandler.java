@@ -1,5 +1,6 @@
 package com.lookzhang.client.message;
 
+import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -12,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version 1.0
  * @date 2014年3月15日
  */
-public class LoginAuthRespHandler extends ChannelInboundHandlerAdapter {
+public class LoginAuthRespHandler extends ChannelHandlerAdapter {
 
 
     /**

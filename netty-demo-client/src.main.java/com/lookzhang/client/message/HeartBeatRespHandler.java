@@ -1,5 +1,6 @@
 package com.lookzhang.client.message;
 
+import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -8,7 +9,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * @version 1.0
  * @date 2014年3月15日
  */
-public class HeartBeatRespHandler extends ChannelInboundHandlerAdapter {
+public class HeartBeatRespHandler extends ChannelHandlerAdapter {
 
 
 
