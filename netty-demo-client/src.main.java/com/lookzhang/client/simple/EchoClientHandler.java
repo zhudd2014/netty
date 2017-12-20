@@ -1,4 +1,4 @@
-package com.lookzhang.client;
+package com.lookzhang.client.simple;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -7,36 +7,32 @@ import io.netty.channel.ChannelHandlerContext;
 
 import java.io.UnsupportedEncodingException;
 
-public class TimeClientHandler extends ChannelHandlerAdapter {
+public class EchoClientHandler extends ChannelHandlerAdapter {
 
-    private final String requestCode = "QUERY TIME ORDER";
+    private static String special_code = "$_";
 
-    private int counter;
+    private static final String ECHO_REQ = "hi,I am look" + special_code;
+
+    private int counter = 0;
 
     private byte[] req;
 
-    public TimeClientHandler() {
-        req = (requestCode + System.getProperty("line.separator")).getBytes();
-    }
-
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        ByteBuf message = null;
         for (int i = 0; i < 100; i++) {
-            message = Unpooled.buffer(req.length);
-            message.writeBytes(req);
-            ctx.writeAndFlush(message);
+            ctx.writeAndFlush(Unpooled.copiedBuffer(ECHO_REQ.getBytes()));
         }
 
     }
 
     @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        ctx.flush();
+    }
+
+    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws UnsupportedEncodingException {
-//        ByteBuf buf = (ByteBuf) msg;
-//        byte[] req = new byte[buf.readableBytes()];
-//        buf.readBytes(req);
-//
-//        String body = new String(req, "UTF-8");
+
         String body = (String) msg;
         System.out.println("Now is body:" + body + "; the counter is :" + ++counter);
     }

@@ -1,4 +1,4 @@
-package com.lookzhang.server;
+package com.lookzhang.server.simple;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
