@@ -56,10 +56,11 @@ public class NettyClient {
             ChannelFuture future = b.connect(
                     new InetSocketAddress(host, port),
                     new InetSocketAddress(NettyConstant.IP,
-                            NettyConstant.LOCAL_PORT)).sync();
+                            NettyConstant.CLIENT_PORT)).sync();
             // 当对应的channel关闭的时候，就会返回对应的channel。
             // Returns the ChannelFuture which will be notified when this channel is closed. This method always returns the same future instance.
             future.channel().closeFuture().sync();
+            System.out.println("future is Done " + future.isDone());
         } finally {
             // 所有资源释放完成之后，清空资源，再次发起重连操作
             executor.execute(new Runnable() {
@@ -68,7 +69,7 @@ public class NettyClient {
                     try {
                         TimeUnit.SECONDS.sleep(1);
                         try {
-                            connect(NettyConstant.PORT, NettyConstant.IP);// 发起重连操作
+                            connect(NettyConstant.SERVER_PORT, NettyConstant.IP);// 发起重连操作
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -85,7 +86,7 @@ public class NettyClient {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        new NettyClient().connect(NettyConstant.PORT, NettyConstant.IP);
+        new NettyClient().connect(NettyConstant.SERVER_PORT, NettyConstant.IP);
     }
 
 }

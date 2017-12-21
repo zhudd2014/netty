@@ -45,9 +45,9 @@ public class NettyServer {
                 });
 
         // 绑定端口，同步等待成功
-        b.bind(NettyConstant.IP, NettyConstant.PORT).sync();
+        b.bind(NettyConstant.IP, NettyConstant.SERVER_PORT).sync();
         System.out.println("Netty server start ok : "
-                + (NettyConstant.IP + " : " + NettyConstant.PORT));
+                + (NettyConstant.IP + " : " + NettyConstant.SERVER_PORT));
     }
 
     public static void main(String[] args) throws Exception {
