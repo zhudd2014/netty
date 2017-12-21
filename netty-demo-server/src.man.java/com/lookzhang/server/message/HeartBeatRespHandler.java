@@ -11,10 +11,10 @@ import io.netty.channel.ChannelHandlerContext;
 public class HeartBeatRespHandler extends ChannelHandlerAdapter {
 
 
-
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg)
             throws Exception {
+        System.out.println("HeartBeatRespHandler response message:" + msg);
         NettyMessage message = (NettyMessage) msg;
         // 返回心跳应答消息
         if (message.getHeader() != null
@@ -25,8 +25,9 @@ public class HeartBeatRespHandler extends ChannelHandlerAdapter {
             System.out.println("Send heart beat response message to client : ---> "
                     + heartBeat);
             ctx.writeAndFlush(heartBeat);
-        } else
+        } else {
             ctx.fireChannelRead(msg);
+        }
     }
 
     private NettyMessage buildHeatBeat() {

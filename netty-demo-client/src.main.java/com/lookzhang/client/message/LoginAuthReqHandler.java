@@ -26,16 +26,18 @@ public class LoginAuthReqHandler extends ChannelHandlerAdapter {
         if (message.getHeader() != null
                 && message.getHeader().getType() == MessageType.LOGIN_RESP) {
             String loginResult = (String) message.getBody();
-            if ("OK".equals(loginResult)) {
+            if (!"OK".equals(loginResult)) {
                 // 握手失败，关闭连接
                 ctx.close();
             } else {
                 System.out.println("Login is ok : " + message);
                 ctx.fireChannelRead(msg);
             }
-        } else
+        } else{
             //调用下一个channel链..
             ctx.fireChannelRead(msg);
+        }
+
     }
 
     /**
@@ -51,6 +53,7 @@ public class LoginAuthReqHandler extends ChannelHandlerAdapter {
 
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
             throws Exception {
+        cause.printStackTrace();
         ctx.fireExceptionCaught(cause);
     }
 }

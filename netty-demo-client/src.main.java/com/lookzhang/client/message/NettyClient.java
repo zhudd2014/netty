@@ -62,12 +62,13 @@ public class NettyClient {
             future.channel().closeFuture().sync();
             System.out.println("future is Done " + future.isDone());
         } finally {
+            System.out.println("Start finally execute");
             // 所有资源释放完成之后，清空资源，再次发起重连操作
             executor.execute(new Runnable() {
 
                 public void run() {
                     try {
-                        TimeUnit.SECONDS.sleep(1);
+                        TimeUnit.SECONDS.sleep(6);
                         try {
                             connect(NettyConstant.SERVER_PORT, NettyConstant.IP);// 发起重连操作
                         } catch (Exception e) {

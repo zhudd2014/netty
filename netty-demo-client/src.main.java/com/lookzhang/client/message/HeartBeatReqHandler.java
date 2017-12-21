@@ -21,6 +21,9 @@ public class HeartBeatReqHandler extends ChannelHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg)
             throws Exception {
+
+        System.out.println("HeartBeatReqHandler handler message" + msg);
+
         NettyMessage message = (NettyMessage) msg;
         // 当握手成功后，Login响应向下透传，主动发送心跳消息
         if (message.getHeader() != null
@@ -33,8 +36,9 @@ public class HeartBeatReqHandler extends ChannelHandlerAdapter {
                 && message.getHeader().getType() == MessageType.HEARTBEAT_RESP) {
             System.out.println("Client receive server heart beat message : ---> "
                     + message);
-        } else
+        } else {
             ctx.fireChannelRead(msg);
+        }
     }
 
     //Ping消息任务类
