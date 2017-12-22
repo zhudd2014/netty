@@ -19,6 +19,11 @@
     <dependencies>
 
 
+        <dependency>
+            <groupId>com.lookzhang</groupId>
+            <artifactId>netty.demo.remoting</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>
