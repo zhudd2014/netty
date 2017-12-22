@@ -25,7 +25,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.fenqile" level="info"/>
+    <logger name="com.lookzhang" level="info"/>
 
     <root level="warn">
         <appender-ref ref="console"/>
