@@ -22,9 +22,9 @@ public class NettyServer {
 
 
     public void bind() throws Exception {
-        // 配置服务端的NIO线程组
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        // Netty的Reactor线程池EventLoopGroup配置服务端的NIO线程组
+        EventLoopGroup bossGroup = new NioEventLoopGroup();//用于设置工作I/O线程，父线程池
+        EventLoopGroup workerGroup = new NioEventLoopGroup();//用于处理I/O读写的线程组，子线程池
         ServerBootstrap b = new ServerBootstrap();
         b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
                 .option(ChannelOption.SO_BACKLOG, 100)
